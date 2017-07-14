@@ -1,0 +1,18 @@
+version: "3.0"
+services:
+  app1:
+    image: autenti-google-app1:latest
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    environment:
+      - SECURITY_OAUTH2_CLIENT_CLIENTID=123-lalala.apps.googleusercontent.com
+      - SECURITY_OAUTH2_CLIENT_CLIENTSECRET=lalala
+      - SPRING_DATA_MONGODB_HOST=mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/db

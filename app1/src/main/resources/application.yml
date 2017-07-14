@@ -1,8 +1,8 @@
 security:
   oauth2:
     client:
-      clientId: xxx
-      clientSecret: yyy
+      clientId: 123-lalala.apps.googleusercontent.com
+      clientSecret: lalala
       accessTokenUri: https://accounts.google.com/o/oauth2/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
       tokenName: oauth_token
