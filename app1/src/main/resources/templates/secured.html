@@ -10,7 +10,14 @@
 <body>
 
 <div>
+    <h1>Secured Page</h1>
+
     <p th:text="${user}">Test</p>
+
+    <br />
+
+    <p th:each="d : ${documents}" th:text="${d.title}">Doc1</p>
+
 
     <a href="/logout">Logout</a>
 </div>
