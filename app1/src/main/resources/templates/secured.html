@@ -18,6 +18,9 @@
 
     <p th:each="d : ${documents}" th:text="${d.title}">Doc1</p>
 
+    <br />
+
+    <p th:each="u : ${users}" th:text="${u.email}">Email1</p>
 
     <a href="/logout">Logout</a>
 </div>

@@ -1,7 +1,9 @@
 package eu.autenti.google.app1;
 
 import eu.autenti.google.app1.entities.DocumentEntity;
+import eu.autenti.google.app1.entities.UserEntity;
 import eu.autenti.google.app1.repositories.DocumentRepository;
+import eu.autenti.google.app1.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,9 @@ public class App1Application extends WebSecurityConfigurerAdapter implements Com
 
 	@Autowired
 	private DocumentRepository documentRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(App1Application.class, args);
@@ -44,9 +49,11 @@ public class App1Application extends WebSecurityConfigurerAdapter implements Com
 	@Override
 	public void run(String... strings) throws Exception {
 		documentRepository.deleteAll();
+		userRepository.deleteAll();
 
 		for(int i=0; i<3; i++) {
 			documentRepository.save(new DocumentEntity("Title" + i));
+			userRepository.save(new UserEntity("email" + i + "@lalala.com"));
 		}
 	}
 }
