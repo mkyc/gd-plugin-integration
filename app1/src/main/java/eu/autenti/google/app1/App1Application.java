@@ -30,6 +30,7 @@ public class App1Application extends WebSecurityConfigurerAdapter implements Com
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
 		http
 				.antMatcher("/**")
 				.authorizeRequests()

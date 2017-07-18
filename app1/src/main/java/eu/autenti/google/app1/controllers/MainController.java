@@ -32,11 +32,10 @@ public class MainController {
     }
 
     @RequestMapping("/secured")
-    public String securedPage(OAuth2Authentication authentication, Model model) {
-        LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)authentication.getUserAuthentication().getDetails();
+
+    public String securedPage(Model model) {
         Collection<DocumentEntity> documents = documentRepository.findAll();
         Collection<UserEntity> users = userRepository.findAll();
-        model.addAttribute("user", details.get("email"));
         model.addAttribute("documents", documents);
         model.addAttribute("users", users);
         return "secured";
