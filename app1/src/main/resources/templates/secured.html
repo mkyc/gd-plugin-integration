@@ -17,7 +17,7 @@
 
     <br />
 
-    <p th:each="u : ${users}" th:text="${u.email}">Email1</p>
+    <p th:each="u : ${users}" th:text="'email: ' + ${u.email} + ' created: ' + ${u.created}">Email1</p>
 
     <a href="/logout">Logout</a>
 </div>

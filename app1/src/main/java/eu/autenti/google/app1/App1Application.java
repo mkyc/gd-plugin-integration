@@ -12,10 +12,12 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @SpringBootApplication
 @EnableOAuth2Sso
-public class App1Application extends WebSecurityConfigurerAdapter implements CommandLineRunner {
+@EnableRedisHttpSession
+public class App1Application extends WebSecurityConfigurerAdapter { //implements CommandLineRunner {
 
 
 	@Autowired
@@ -34,7 +36,7 @@ public class App1Application extends WebSecurityConfigurerAdapter implements Com
 		http
 				.antMatcher("/**")
 				.authorizeRequests()
-				.antMatchers("/", "/documents")
+				.antMatchers("/", "/documents", "/users")
 				.permitAll()
 				.anyRequest()
 				.authenticated()
@@ -46,15 +48,15 @@ public class App1Application extends WebSecurityConfigurerAdapter implements Com
 				.csrf()
 				.disable();
 	}
-
-	@Override
-	public void run(String... strings) throws Exception {
-		documentRepository.deleteAll();
-		userRepository.deleteAll();
-
-		for(int i=0; i<3; i++) {
-			documentRepository.save(new DocumentEntity("Title" + i));
-			userRepository.save(new UserEntity("email" + i + "@lalala.com"));
-		}
-	}
+//
+//	@Override
+//	public void run(String... strings) throws Exception {
+//		documentRepository.deleteAll();
+//		userRepository.deleteAll();
+//
+//		for(int i=0; i<3; i++) {
+//			documentRepository.save(new DocumentEntity("Title" + i));
+//			userRepository.save(new UserEntity("email" + i + "@lalala.com"));
+//		}
+//	}
 }

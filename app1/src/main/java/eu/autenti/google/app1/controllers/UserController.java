@@ -16,8 +16,8 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping(method = RequestMethod.POST)
-    public String saveDocument(@RequestBody UserEntity user) {
-        UserEntity result = userRepository.save(user);
+    public String saveUser(@RequestBody UserEntity user) {
+        UserEntity result = userRepository.save(new UserEntity(user.email));
         return result.id;
     }
 
