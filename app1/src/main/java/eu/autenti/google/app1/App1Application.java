@@ -1,11 +1,8 @@
 package eu.autenti.google.app1;
 
-import eu.autenti.google.app1.entities.DocumentEntity;
-import eu.autenti.google.app1.entities.UserEntity;
 import eu.autenti.google.app1.repositories.DocumentRepository;
 import eu.autenti.google.app1.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -17,14 +14,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 @EnableOAuth2Sso
 @EnableRedisHttpSession
-public class App1Application extends WebSecurityConfigurerAdapter { //implements CommandLineRunner {
-
-
-	@Autowired
-	private DocumentRepository documentRepository;
-
-	@Autowired
-	private UserRepository userRepository;
+public class App1Application extends WebSecurityConfigurerAdapter {
 
 	public static void main(String[] args) {
 		SpringApplication.run(App1Application.class, args);
@@ -48,15 +38,4 @@ public class App1Application extends WebSecurityConfigurerAdapter { //implements
 				.csrf()
 				.disable();
 	}
-//
-//	@Override
-//	public void run(String... strings) throws Exception {
-//		documentRepository.deleteAll();
-//		userRepository.deleteAll();
-//
-//		for(int i=0; i<3; i++) {
-//			documentRepository.save(new DocumentEntity("Title" + i));
-//			userRepository.save(new UserEntity("email" + i + "@lalala.com"));
-//		}
-//	}
 }

@@ -15,6 +15,8 @@ public class UserEntity {
 
     public LocalDateTime created;
 
+    public UserEntity() {}
+
     public UserEntity(String email) {
         this.email = email;
         this.created = LocalDateTime.now();

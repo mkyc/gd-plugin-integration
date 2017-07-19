@@ -5,8 +5,6 @@ import eu.autenti.google.app1.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -22,11 +20,6 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Collection<UserEntity> getAllUsers(){
-        return userRepository.findAll();
-    }
-
-    @RequestMapping(path = "/{email}", method = RequestMethod.GET)
     public UserEntity getUser(@RequestParam(name = "email") String email) {
         return userRepository.findOneByEmail(email);
     }
