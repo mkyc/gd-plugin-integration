@@ -15,10 +15,17 @@ public class UserEntity {
 
     public LocalDateTime created;
 
+    public String temporaryAccessToken;
+
     public UserEntity() {}
 
     public UserEntity(String email) {
+        new UserEntity(email, null);
+    }
+
+    public UserEntity(String email, String temporaryAccessToken) {
         this.email = email;
+        this.temporaryAccessToken = temporaryAccessToken;
         this.created = LocalDateTime.now();
     }
 }

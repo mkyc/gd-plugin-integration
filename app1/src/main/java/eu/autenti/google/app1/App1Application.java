@@ -1,8 +1,5 @@
 package eu.autenti.google.app1;
 
-import eu.autenti.google.app1.repositories.DocumentRepository;
-import eu.autenti.google.app1.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;

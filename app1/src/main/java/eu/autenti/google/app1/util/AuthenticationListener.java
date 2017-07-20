@@ -1,7 +1,6 @@
 package eu.autenti.google.app1.util;
 
-import eu.autenti.google.app1.entities.UserEntity;
-import eu.autenti.google.app1.repositories.UserRepository;
+import eu.autenti.google.app1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
@@ -15,14 +14,11 @@ public class AuthenticationListener implements ApplicationListener<Authenticatio
 
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)((OAuth2Authentication) event.getAuthentication()).getUserAuthentication().getDetails();
-        UserEntity user = userRepository.findOneByEmail(details.get("email"));
-        if(user == null) {
-            userRepository.save(new UserEntity(details.get("email")));
-        }
+        userService.createIfDoesNotExist(details.get("email"));
     }
 }
