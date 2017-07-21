@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <!-- The CSS package above applies Google styling to buttons and other elements. -->
+
+    <style>
+    .branding-below {
+      bottom: 56px;
+      top: 0;
+    }
+
+    .branding-text {
+      left: 7px;
+      position: relative;
+      top: 3px;
+    }
+
+    .col-contain {
+      overflow: hidden;
+    }
+
+    .col-one {
+      float: left;
+      width: 50%;
+    }
+
+    .logo {
+      vertical-align: middle;
+    }
+
+    .radio-spacer {
+      height: 20px;
+    }
+
+    .width-100 {
+      width: 100%;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar branding-below">
+      <form>
+       <div class="block" id="button-bar">
+          <button class="blue" id="run">Get External Documents</button>
+          <br />
+          <button class="blue" id="run2">Get Current Document</button>
+          <br />
+          <button class="blue" id="run3">Get Current User</button>
+          <br />
+          <button class="blue" id="run4">Check if you have account</button>
+          <br />
+          <button class="blue" id="run5">Create account. </button>
+          <br />
+          <button class="blue" id="run6">Update accessToken. </button>
+          <br />
+          <button class="green" id="run7">Send document. </button>
+        </div>
+
+        <div class="block form-group">
+          <div id="result"></div>
+        </div>
+      </form>
+    </div>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <script>
+      $(function() {
+        $('#run').click(runIt);
+        $('#run2').click(runIt2);
+        $('#run3').click(runIt3);
+        $('#run4').click(runIt4);
+        $('#run5').click(runIt5);
+        $('#run6').click(runIt6);
+        $('#run7').click(runIt7);
+      });
+
+
+      function onFailure(msg, element) {
+                showError(msg, $('#button-bar'));
+                element.disabled = false;
+              }
+
+
+
+      function onSuccess(result, element) {
+        var div = document.getElementById('result');
+
+        var str = '';
+        for(var i in result) {
+          str = str.concat(result[i].title + ', ');
+        }
+
+        div.innerHTML = 'books: ' + str + '.';
+            element.disabled = false;
+      }
+
+     function onSuccess2(result, element) {
+        var div = document.getElementById('result');
+
+            div.innerHTML = 'Title: ' + result.title + ', id: ' + result.id + ' ';
+            element.disabled = false;
+      }
+
+       function onSuccess3(result, element) {
+        var div = document.getElementById('result');
+
+            div.innerHTML = 'User: ' + result.email + ', key: ' + result.key + ' ';
+            element.disabled = false;
+      }
+
+      function onSuccess4(result, element) {
+        var div = document.getElementById('result');
+
+        if(result == true) {
+            div.innerHTML = 'You have account';
+        } else {
+            div.innerHTML = 'You do not have account.';
+        }
+            element.disabled = false;
+      }
+
+      function onSuccess5(result, element) {
+        var div = document.getElementById('result');
+
+        if(result == true) {
+            div.innerHTML = 'You created account';
+        } else {
+            div.innerHTML = 'You didn\'t create account.';
+        }
+            element.disabled = false;
+      }
+
+      function onSuccess6(result, element) {
+        var div = document.getElementById('result');
+
+        if(result == true) {
+            div.innerHTML = 'You updated accessToken.';
+        } else {
+            div.innerHTML = 'No, no, no.';
+        }
+            element.disabled = false;
+      }
+
+      function onSuccess7(result, element) {
+        var div = document.getElementById('result');
+
+        if(result == true) {
+            div.innerHTML = 'Document sent.';
+        } else {
+            div.innerHTML = 'No, no, no.';
+        }
+            element.disabled = false;
+      }
+
+      function runIt() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .getDocumentsTest();
+      }
+
+      function runIt2() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess2)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .getCurrentDocument();
+      }
+
+      function runIt3() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess3)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .getCurrentUser();
+      }
+
+      function runIt4() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess4)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .checkUserInExternalApp();
+      }
+
+      function runIt5() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess5)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .createAccountInExternalApp();
+      }
+
+      function runIt6() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess6)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .updateAccessToken();
+      }
+
+      function runIt7() {
+        this.disabled = true;
+        $('#error').remove();
+        google.script.run
+            .withSuccessHandler(onSuccess7)
+            .withFailureHandler(onFailure)
+            .withUserObject(this)
+            .pushDocument();
+      }
+
+      function showError(msg, element) {
+        var div = $('<div id="error" class="error">' + msg + '</div>');
+        $(element).after(div);
+      }
+    </script>
+  </body>
+</html>
