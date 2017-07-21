@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
+
 @SpringBootApplication
 @EnableOAuth2Sso
 @EnableRedisHttpSession
@@ -35,4 +36,5 @@ public class App1Application extends WebSecurityConfigurerAdapter {
 				.csrf()
 				.disable();
 	}
+
 }
